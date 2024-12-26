@@ -1,0 +1,15 @@
+C:\Users\sswaren\source\eget\BookApi\BookApi.Application.Contracts\bin\Debug\net9.0\BookApi.Application.Contracts.deps.json
+C:\Users\sswaren\source\eget\BookApi\BookApi.Application.Contracts\bin\Debug\net9.0\BookApi.Application.Contracts.dll
+C:\Users\sswaren\source\eget\BookApi\BookApi.Application.Contracts\bin\Debug\net9.0\BookApi.Application.Contracts.pdb
+C:\Users\sswaren\source\eget\BookApi\BookApi.Application.Contracts\bin\Debug\net9.0\BookApi.EntityFrameworkCore.dll
+C:\Users\sswaren\source\eget\BookApi\BookApi.Application.Contracts\bin\Debug\net9.0\BookApi.EntityFrameworkCore.pdb
+C:\Users\sswaren\source\eget\BookApi\BookApi.Application.Contracts\obj\Debug\net9.0\BookApi.Application.Contracts.csproj.AssemblyReference.cache
+C:\Users\sswaren\source\eget\BookApi\BookApi.Application.Contracts\obj\Debug\net9.0\BookApi.Application.Contracts.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\sswaren\source\eget\BookApi\BookApi.Application.Contracts\obj\Debug\net9.0\BookApi.Application.Contracts.AssemblyInfoInputs.cache
+C:\Users\sswaren\source\eget\BookApi\BookApi.Application.Contracts\obj\Debug\net9.0\BookApi.Application.Contracts.AssemblyInfo.cs
+C:\Users\sswaren\source\eget\BookApi\BookApi.Application.Contracts\obj\Debug\net9.0\BookApi.Application.Contracts.csproj.CoreCompileInputs.cache
+C:\Users\sswaren\source\eget\BookApi\BookApi.Application.Contracts\obj\Debug\net9.0\BookApi..81FF31F9.Up2Date
+C:\Users\sswaren\source\eget\BookApi\BookApi.Application.Contracts\obj\Debug\net9.0\BookApi.Application.Contracts.dll
+C:\Users\sswaren\source\eget\BookApi\BookApi.Application.Contracts\obj\Debug\net9.0\refint\BookApi.Application.Contracts.dll
+C:\Users\sswaren\source\eget\BookApi\BookApi.Application.Contracts\obj\Debug\net9.0\BookApi.Application.Contracts.pdb
+C:\Users\sswaren\source\eget\BookApi\BookApi.Application.Contracts\obj\Debug\net9.0\ref\BookApi.Application.Contracts.dll

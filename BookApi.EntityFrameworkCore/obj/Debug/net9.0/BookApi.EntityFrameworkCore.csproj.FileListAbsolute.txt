@@ -1,0 +1,14 @@
+C:\Users\sswaren\source\eget\BookApi\BookApi.EntityFrameworkCore\bin\Debug\net9.0\BookApi.EntityFrameworkCore.deps.json
+C:\Users\sswaren\source\eget\BookApi\BookApi.EntityFrameworkCore\bin\Debug\net9.0\BookApi.EntityFrameworkCore.runtimeconfig.json
+C:\Users\sswaren\source\eget\BookApi\BookApi.EntityFrameworkCore\bin\Debug\net9.0\BookApi.EntityFrameworkCore.dll
+C:\Users\sswaren\source\eget\BookApi\BookApi.EntityFrameworkCore\bin\Debug\net9.0\BookApi.EntityFrameworkCore.pdb
+C:\Users\sswaren\source\eget\BookApi\BookApi.EntityFrameworkCore\obj\Debug\net9.0\BookApi.EntityFrameworkCore.csproj.AssemblyReference.cache
+C:\Users\sswaren\source\eget\BookApi\BookApi.EntityFrameworkCore\obj\Debug\net9.0\BookApi.EntityFrameworkCore.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\sswaren\source\eget\BookApi\BookApi.EntityFrameworkCore\obj\Debug\net9.0\BookApi.EntityFrameworkCore.AssemblyInfoInputs.cache
+C:\Users\sswaren\source\eget\BookApi\BookApi.EntityFrameworkCore\obj\Debug\net9.0\BookApi.EntityFrameworkCore.AssemblyInfo.cs
+C:\Users\sswaren\source\eget\BookApi\BookApi.EntityFrameworkCore\obj\Debug\net9.0\BookApi.EntityFrameworkCore.csproj.CoreCompileInputs.cache
+C:\Users\sswaren\source\eget\BookApi\BookApi.EntityFrameworkCore\obj\Debug\net9.0\BookApi.EntityFrameworkCore.dll
+C:\Users\sswaren\source\eget\BookApi\BookApi.EntityFrameworkCore\obj\Debug\net9.0\refint\BookApi.EntityFrameworkCore.dll
+C:\Users\sswaren\source\eget\BookApi\BookApi.EntityFrameworkCore\obj\Debug\net9.0\BookApi.EntityFrameworkCore.pdb
+C:\Users\sswaren\source\eget\BookApi\BookApi.EntityFrameworkCore\obj\Debug\net9.0\BookApi.EntityFrameworkCore.genruntimeconfig.cache
+C:\Users\sswaren\source\eget\BookApi\BookApi.EntityFrameworkCore\obj\Debug\net9.0\ref\BookApi.EntityFrameworkCore.dll
