@@ -15,37 +15,10 @@ public class CategoryController(CategoryContext context, ICategoryService catego
     [HttpGet("all")]
     public ActionResult<List<CategoryDto>> GetAllCategories()
     {
-
         var result = categoryService.GetAllCategoriesAsync();
         return Ok(result);
     }
 
-    [HttpGet("get/all")]
-    public ActionResult<List<CategoryDto>> GetGetAllCategories()
-    {
-
-        var config = new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<Category, CategoryDto>();
-            cfg.CreateMap<Links, LinksDto>();
-            cfg.CreateMap<LinkObject, LinkObjectDto>();
-        });
-
-        var mapper = new Mapper(config);
-        var res = new GetAllCategoriesResponseDto { };
-
-        var categories = context.Categories
-        .Include(x => x.Links).ThenInclude(y => y.Self)
-        .Include(x => x.Links).ThenInclude(y => y.Books)
-        .Include(x => x.Links).ThenInclude(y => y.DynamicContent).ToList();
-
-        List<CategoryDto> catRes = mapper.Map<List<Category>, List<CategoryDto>>(categories);
-
-        var embedded = catRes.Where(c => c.ParentId == 0);
-        res.Embedded.Categories = embedded.ToList();
-
-        return Ok(res);
-    }
 
     [HttpPost("add/{title}")]
     public async Task<ActionResult<List<CategoryDto>>> PostCategory([FromRoute] string title)
