@@ -152,3 +152,4 @@ C:\Users\sswaren\source\eget\BookApi\BookApi.WebApi\obj\Debug\net9.0\refint\Book
 C:\Users\sswaren\source\eget\BookApi\BookApi.WebApi\obj\Debug\net9.0\BookApi.WebApi.pdb
 C:\Users\sswaren\source\eget\BookApi\BookApi.WebApi\obj\Debug\net9.0\BookApi.WebApi.genruntimeconfig.cache
 C:\Users\sswaren\source\eget\BookApi\BookApi.WebApi\obj\Debug\net9.0\ref\BookApi.WebApi.dll
+C:\Users\sswaren\source\eget\BookApi\BookApi.WebApi\obj\Debug\net9.0\BookApi.WebApi.sourcelink.json

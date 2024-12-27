@@ -13,3 +13,4 @@ C:\Users\sswaren\source\eget\BookApi\BookApi.Application\obj\Debug\net9.0\BookAp
 C:\Users\sswaren\source\eget\BookApi\BookApi.Application\obj\Debug\net9.0\refint\BookApi.Application.dll
 C:\Users\sswaren\source\eget\BookApi\BookApi.Application\obj\Debug\net9.0\BookApi.Application.pdb
 C:\Users\sswaren\source\eget\BookApi\BookApi.Application\obj\Debug\net9.0\ref\BookApi.Application.dll
+C:\Users\sswaren\source\eget\BookApi\BookApi.Application\obj\Debug\net9.0\BookApi.Application.sourcelink.json

@@ -12,3 +12,4 @@ C:\Users\sswaren\source\eget\BookApi\BookApi.EntityFrameworkCore\obj\Debug\net9.
 C:\Users\sswaren\source\eget\BookApi\BookApi.EntityFrameworkCore\obj\Debug\net9.0\BookApi.EntityFrameworkCore.pdb
 C:\Users\sswaren\source\eget\BookApi\BookApi.EntityFrameworkCore\obj\Debug\net9.0\BookApi.EntityFrameworkCore.genruntimeconfig.cache
 C:\Users\sswaren\source\eget\BookApi\BookApi.EntityFrameworkCore\obj\Debug\net9.0\ref\BookApi.EntityFrameworkCore.dll
+C:\Users\sswaren\source\eget\BookApi\BookApi.EntityFrameworkCore\obj\Debug\net9.0\BookApi.EntityFrameworkCore.sourcelink.json

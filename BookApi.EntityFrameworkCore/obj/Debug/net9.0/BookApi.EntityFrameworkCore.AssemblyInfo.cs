@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BookApi.EntityFrameworkCore")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6f189e42555f08e937eeb1b616db1106324f37dc")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+308b47917db26792c5fe0f10f1cfb1172cdf5e9a")]
 [assembly: System.Reflection.AssemblyProductAttribute("BookApi.EntityFrameworkCore")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BookApi.EntityFrameworkCore")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
