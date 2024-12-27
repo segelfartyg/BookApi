@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\build\BookApi.WebApi.props" />
-</Project>

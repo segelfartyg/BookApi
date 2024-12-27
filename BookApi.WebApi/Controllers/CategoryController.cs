@@ -1,6 +1,7 @@
 using System.IO.Compression;
 using AutoMapper;
 using BookApi.Application.Contracts.Dto;
+using BookApi.Application.Interfaces;
 using BookApi.EntityFrameworkCore.Data;
 using BookApi.EntityFrameworkCore.Model;
 using Microsoft.AspNetCore.Mvc;
@@ -9,10 +10,18 @@ using Microsoft.EntityFrameworkCore;
 namespace BookApi.Controllers;
 
 [Route("/api/v1/[controller]")]
-public class CategoryController(CategoryContext context) : ControllerBase
+public class CategoryController(CategoryContext context, ICategoryService categoryService) : ControllerBase
 {
     [HttpGet("all")]
     public ActionResult<List<CategoryDto>> GetAllCategories()
+    {
+
+        var result = categoryService.GetAllCategoriesAsync();
+        return Ok(result);
+    }
+
+    [HttpGet("get/all")]
+    public ActionResult<List<CategoryDto>> GetGetAllCategories()
     {
 
         var config = new MapperConfiguration(cfg =>
@@ -37,7 +46,6 @@ public class CategoryController(CategoryContext context) : ControllerBase
 
         return Ok(res);
     }
-
 
     [HttpPost("add/{title}")]
     public async Task<ActionResult<List<CategoryDto>>> PostCategory([FromRoute] string title)

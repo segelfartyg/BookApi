@@ -13,7 +13,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <!-- <ProjectReference Include="../BookApi.Application/BookApi.Application.csproj" /> -->
+    <ProjectReference Include="../BookApi.Application/BookApi.Application.csproj" />
     <ProjectReference Include="../BookApi.Application.Contracts/BookApi.Application.Contracts.csproj" />
     <ProjectReference Include="../BookApi.EntityFrameworkCore/BookApi.EntityFrameworkCore.csproj" />
   </ItemGroup>

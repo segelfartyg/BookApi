@@ -6,5 +6,6 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="../BookApi.EntityFrameworkCore/BookApi.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="../BookApi.Application.Contracts/BookApi.Application.Contracts.csproj" />
   </ItemGroup>
 </Project>

@@ -16,18 +16,18 @@ Dynamic = 0
 for category in categories:
     LinkObjectCount  = LinkObjectCount + 1
     Self = LinkObjectCount
-    LinkObjectCode += 'new LinkObject { Id = ' + str(LinkObjectCount) +', Method = "GET", Title = "", Href = new Uri("https://api.bookbeat.com/api/categories/' + str(category) +'") },'
+    LinkObjectCode += 'new LinkObject { Id = ' + str(LinkObjectCount) +', Method = "GET", Href = new Uri("https://api.bookbeat.com/api/categories/' + str(category) +'") },'
     LinkObjectCode += "\n"
 
     
     LinkObjectCount  = LinkObjectCount + 1
     Books = LinkObjectCount
-    LinkObjectCode += 'new LinkObject { Id = ' + str(LinkObjectCount) +', Method = "GET", Title = "", Href = new Uri("https://api.bookbeat.com/api/categories/' + str(category) +'/books?offset=0&limit=50") },'
+    LinkObjectCode += 'new LinkObject { Id = ' + str(LinkObjectCount) +', Method = "GET", Title = "Books", Href = new Uri("https://api.bookbeat.com/api/categories/' + str(category) +'/books?offset=0&limit=50") },'
 
     LinkObjectCode += "\n"
     LinkObjectCount  = LinkObjectCount + 1
     Dynamic = LinkObjectCount
-    LinkObjectCode += 'new LinkObject { Id = ' + str(LinkObjectCount) +', Method = "GET", Title = "", Href = new Uri("https://api.bookbeat.com/api/categoryviews/' + str(category) +'?offset=0&limit=50") },'
+    LinkObjectCode += 'new LinkObject { Id = ' + str(LinkObjectCount) +', Method = "GET", Href = new Uri("https://api.bookbeat.com/api/categoryviews/' + str(category) +'?offset=0&limit=50") },'
     LinkObjectCode += "\n"
 
     LinkCount = LinkCount + 1
