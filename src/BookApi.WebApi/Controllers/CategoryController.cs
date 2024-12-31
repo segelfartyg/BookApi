@@ -10,8 +10,13 @@ using Microsoft.EntityFrameworkCore;
 namespace BookApi.Controllers;
 
 [Route("/api/v1/[controller]")]
-public class CategoryController(CategoryContext context, ICategoryService categoryService) : ControllerBase
+public class CategoryController(ICategoryService categoryService) : ControllerBase
 {
+
+    /// <summary>
+    /// Retrieves all categories, including child categories, present in the system.
+    /// </summary>
+    /// <returns></returns>
     [HttpGet("all")]
     public ActionResult<List<CategoryDto>> GetAllCategories()
     {
@@ -20,6 +25,11 @@ public class CategoryController(CategoryContext context, ICategoryService catego
         return Ok(result);
     }
 
+    /// <summary>
+    /// Adds a new category, parentId is optional, making it possible to add child elements by specifying its parent.
+    /// </summary>
+    /// <param name="category"></param>
+    /// <returns></returns>
     [HttpPost("")]
     public async Task<ActionResult<List<CategoryDto>>> PostCategory([FromBody] PostCategoryRequestDto category)
     {   
@@ -27,6 +37,11 @@ public class CategoryController(CategoryContext context, ICategoryService catego
         return Ok(result);
     }
 
+    /// <summary>
+    /// Deletes a category based on id, returns notfound if not present
+    /// </summary>
+    /// <param name="categoryId"></param>
+    /// <returns></returns>
     [HttpDelete("{categoryId}")]
      public async Task<ActionResult<List<CategoryDto>>> DeleteCategory([FromRoute] int categoryId)
     {

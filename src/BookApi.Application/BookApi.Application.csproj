@@ -8,4 +8,7 @@
     <ProjectReference Include="../BookApi.EntityFrameworkCore/BookApi.EntityFrameworkCore.csproj" />
     <ProjectReference Include="../BookApi.Application.Contracts/BookApi.Application.Contracts.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="StackExchange.Redis" Version="2.8.24" />
+  </ItemGroup>
 </Project>

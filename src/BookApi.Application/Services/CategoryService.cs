@@ -1,8 +1,11 @@
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using AutoMapper;
 using BookApi.Application.Contracts.Dto;
 using BookApi.Application.Interfaces;
 using BookApi.EntityFrameworkCore.Interfaces;
 using BookApi.EntityFrameworkCore.Model;
+using StackExchange.Redis;
 
 namespace BookApi.Application;
 
@@ -10,7 +13,19 @@ public class CategoryService(ICategoryRepository categoryRepository, IMapper map
 {
     public async Task<GetAllCategoriesResponseDto> GetAllCategoriesAsync()
     {
-        var result = new GetAllCategoriesResponseDto{};
+
+        var result = new GetAllCategoriesResponseDto { };
+
+        ConnectionMultiplexer redis = ConnectionMultiplexer.Connect("127.0.0.1:6379");
+        IDatabase db = redis.GetDatabase();
+
+       var cacheRes = db.StringGet("ALL_CATEGORIES_CACHE_KEY");
+
+        if (cacheRes != RedisValue.Null)
+        {
+            result = JsonSerializer.Deserialize<GetAllCategoriesResponseDto>(cacheRes.ToString());
+            return result!;
+        }
 
         var categoryList = await categoryRepository.GetListAsync();
 
@@ -18,6 +33,15 @@ public class CategoryService(ICategoryRepository categoryRepository, IMapper map
 
         var embedded = mapResult.Where(c => c.ParentId == 0);
         result.Embedded.Categories = embedded.ToList();
+
+        var options = new JsonSerializerOptions
+        {
+            WriteIndented = true,
+            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+        };
+
+        var json = JsonSerializer.Serialize(result, options);
+        var cacheSetRes = db.StringSet("ALL_CATEGORIES_CACHE_KEY", json);
 
         return result;
     }
@@ -53,7 +77,7 @@ public class CategoryService(ICategoryRepository categoryRepository, IMapper map
         links.DynamicContent.Href = category.Links.DynamicContent.Href;
         links.DynamicContent.Method = category.Links.DynamicContent.Method;
         links.DynamicContent.Title = category.Links.DynamicContent.Title;
-        
+
         cat.Links = links;
         cat.ParentId = category.ParentId;
 
