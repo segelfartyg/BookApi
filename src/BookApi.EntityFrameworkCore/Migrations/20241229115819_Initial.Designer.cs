@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookApi.EntityFrameworkCore.Migrations
 {
     [DbContext(typeof(CategoryContext))]
-    [Migration("20241227143458_Initial")]
+    [Migration("20241229115819_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -4578,7 +4578,8 @@ namespace BookApi.EntityFrameworkCore.Migrations
                 {
                     b.HasOne("BookApi.EntityFrameworkCore.Model.Category", "Parent")
                         .WithMany("Children")
-                        .HasForeignKey("ParentId");
+                        .HasForeignKey("ParentId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Parent");
                 });
@@ -4591,7 +4592,8 @@ namespace BookApi.EntityFrameworkCore.Migrations
 
                     b.HasOne("BookApi.EntityFrameworkCore.Model.Category", "Category")
                         .WithOne("Links")
-                        .HasForeignKey("BookApi.EntityFrameworkCore.Model.Links", "CategoryId");
+                        .HasForeignKey("BookApi.EntityFrameworkCore.Model.Links", "CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("BookApi.EntityFrameworkCore.Model.LinkObject", "DynamicContent")
                         .WithMany()

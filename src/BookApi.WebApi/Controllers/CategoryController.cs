@@ -15,146 +15,24 @@ public class CategoryController(CategoryContext context, ICategoryService catego
     [HttpGet("all")]
     public ActionResult<List<CategoryDto>> GetAllCategories()
     {
+        // TODO: Check cache
         var result = categoryService.GetAllCategoriesAsync();
         return Ok(result);
     }
 
-
-    [HttpPost("add/{title}")]
-    public async Task<ActionResult<List<CategoryDto>>> PostCategory([FromRoute] string title)
-    {
-
-        var cat = new Category()
-        {
-            Title = title,
-            Image = new Uri("https://prod-bb-images.akamaized.net/categories-covers/cat/img_category_12.png?format=png&quality=75&w=450")
-        };
-
-        var links = new Links()
-        {
-            Category = cat,
-            CategoryId = cat.Id
-        };
-
-        links.Self = new LinkObject()
-        {
-            Href = new Uri("https://romance.se")
-        };
-
-        cat.Links = links;
-
-        await context.Categories.AddAsync(cat);
-        await context.SaveChangesAsync();
-
-        return Ok("done");
+    [HttpPost("")]
+    public async Task<ActionResult<List<CategoryDto>>> PostCategory([FromBody] PostCategoryRequestDto category)
+    {   
+        var result = await categoryService.AddCategoryAsync(category);
+        return Ok(result);
     }
 
-    [HttpPost("sub/add/{title}/{parentId}")]
-    public async Task<ActionResult<List<CategoryDto>>> PostSubCategory([FromRoute] string title, [FromRoute] int parentId)
+    [HttpDelete("{categoryId}")]
+     public async Task<ActionResult<List<CategoryDto>>> DeleteCategory([FromRoute] int categoryId)
     {
 
-        var cat = new Category()
-        {
-            Title = title,
-            Image = new Uri("https://prod-bb-images.akamaized.net/categories-covers/cat/img_category_12.png?format=png&quality=75&w=450")
-        };
+        var result = await categoryService.DeleteCategoryAsync(categoryId);
+        return result ? Ok("category deleted") : NotFound("no category present");
 
-        var links = new Links()
-        {
-            Category = cat,
-            CategoryId = cat.Id
-        };
-
-
-
-        links.Self = new LinkObject()
-        {
-            Href = new Uri("https://romance.se")
-        };
-
-
-        var parent = context.Categories.Single(c => c.Id == parentId);
-        cat.Links = links;
-        parent.Children?.Add(cat);
-
-        await context.SaveChangesAsync();
-
-        return Ok("done");
-    }
-
-    [HttpGet("setup")]
-    public async Task<ActionResult<List<Category>>> Setup()
-    {
-
-        var cat = new Category()
-        {
-            Title = "Crime, Thrillers & Mystery",
-            Image = new Uri("https://prod-bb-images.akamaized.net/categories-covers/cat/img_category_12.png?format=png&quality=75&w=450")
-        };
-
-        var links = new Links()
-        {
-            Category = cat,
-            CategoryId = cat.Id
-        };
-
-        var linksList = new List<LinkObject>(){
-
-                   new LinkObject(){
-                    Href = new Uri("https://google.se"),}
-                   };
-
-        links.Self = new LinkObject()
-        {
-            Href = new Uri("https://romance.se")
-        };
-
-        context.Categories.Add(cat);
-
-        await context.SaveChangesAsync();
-
-        return Ok("done");
-    }
-
-    [HttpGet("add/child/{catId}")]
-    public async Task<ActionResult<List<Category>>> AddChild([FromQuery] int catId)
-    {
-
-        var cat = new Category()
-        {
-            Title = "Romance",
-            Image = new Uri("https://prod-bb-images.akamaized.net/categories-covers/cat/img_category_12.png?format=png&quality=75&w=450")
-        };
-
-        var links = new Links()
-        {
-            Category = cat,
-            CategoryId = cat.Id
-        };
-
-        links.Self = new LinkObject()
-        {
-            Href = new Uri("https://romance.se"),
-            Method = "GET"
-        };
-        links.Books = new LinkObject()
-        {
-            Href = new Uri("https://romance.se"),
-            Method = "GET"
-        };
-        links.DynamicContent = new LinkObject()
-        {
-            Href = new Uri("https://romance.se"),
-            Method = "GET"
-        };
-
-        cat.Links = links;
-
-        var parent = context.Categories.Single(c => c.Id == catId);
-        parent.Children?.Add(cat);
-
-        await context.SaveChangesAsync();
-
-        return Ok("done");
     }
 }

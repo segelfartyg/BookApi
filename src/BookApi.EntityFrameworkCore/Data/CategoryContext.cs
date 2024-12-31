@@ -415,8 +415,8 @@ new LinkObject { Id = 396, Method = "GET", Href = new Uri("https://api.bookbeat.
 
 
         modelBuilder.Entity<Category>(e => {
-            e.HasOne(e => e.Links).WithOne(c => c.Category).HasForeignKey<Links>(x => x.CategoryId);
-            e.HasMany(c => c.Children).WithOne(c => c.Parent).HasForeignKey(x => x.ParentId);
+            e.HasOne(e => e.Links).WithOne(c => c.Category).HasForeignKey<Links>(x => x.CategoryId).OnDelete(DeleteBehavior.Cascade);
+            e.HasMany(c => c.Children).WithOne(c => c.Parent).HasForeignKey(x => x.ParentId).OnDelete(DeleteBehavior.SetNull);
             e.HasData(
 new Category { Id = 12, Image =  new Uri("https://prod-bb-images.akamaized.net/categories-covers/cat/img_category_12.png?format=png&quality=75&w=450"), Title = "Crime, Thrillers & Mystery"},
 new Category { Id = 2, Image =   new Uri("https://prod-bb-images.akamaized.net/categories-covers/cat/img_category_2.png?format=png&quality=75&w=450"), Title = "Novels" },
@@ -571,7 +571,8 @@ new Category { ParentId = 166, Id = 172, Image = new Uri("https://prod-bb-images
 new Category { ParentId = 166, Id = 173, Image = new Uri("https://prod-bb-images.akamaized.net/categories-covers/cat/img_cat_1.png?format=png&quality=75&w=450"), Title = "Romans" },
 new Category { ParentId = 166, Id = 174, Image = new Uri("https://prod-bb-images.akamaized.net/categories-covers/cat/img_cat_69.png?format=png&quality=75&w=450"), Title = "Non-fiction" },
 new Category { ParentId = 166, Id = 175, Image = new Uri("https://prod-bb-images.akamaized.net/categories-covers/cat/img_cat_36.png?format=png&quality=75&w=450"), Title = "Fantasy & Science fiction" },
-new Category { ParentId = 166, Id = 176, Image = new Uri("https://prod-bb-images.akamaized.net/categories-covers/cat/img_cat_52.png?format=png&quality=75&w=450"), Title = "Enfants & Young Adult" });        
+new Category { ParentId = 166, Id = 176, Image = new Uri("https://prod-bb-images.akamaized.net/categories-covers/cat/img_cat_52.png?format=png&quality=75&w=450"), Title = "Enfants & Young Adult" });
+        
         });
 
         

@@ -20,6 +20,7 @@ builder.Services.AddControllers().AddJsonOptions((options) => {
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddAutoMapper(typeof(MapperProfile));
 
 var app = builder.Build();
 

@@ -29,7 +29,8 @@ namespace BookApi.EntityFrameworkCore.Migrations
                         name: "FK_Categories_Categories_ParentId",
                         column: x => x.ParentId,
                         principalTable: "Categories",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.SetNull);
                 });
 
             migrationBuilder.CreateTable(
@@ -65,7 +66,8 @@ namespace BookApi.EntityFrameworkCore.Migrations
                         name: "FK_Links_Categories_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Categories",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Links_LinkObject_BooksId",
                         column: x => x.BooksId,

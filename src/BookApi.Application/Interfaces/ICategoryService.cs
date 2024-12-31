@@ -6,5 +6,9 @@ public interface ICategoryService
     
     public Task<GetAllCategoriesResponseDto> GetAllCategoriesAsync();
 
+    public Task<CategoryDto> AddCategoryAsync(PostCategoryRequestDto category);
+
+    public Task<bool> DeleteCategoryAsync(int categoryId);
+
 
 }

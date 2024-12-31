@@ -4575,7 +4575,8 @@ namespace BookApi.EntityFrameworkCore.Migrations
                 {
                     b.HasOne("BookApi.EntityFrameworkCore.Model.Category", "Parent")
                         .WithMany("Children")
-                        .HasForeignKey("ParentId");
+                        .HasForeignKey("ParentId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Parent");
                 });
@@ -4588,7 +4589,8 @@ namespace BookApi.EntityFrameworkCore.Migrations
 
                     b.HasOne("BookApi.EntityFrameworkCore.Model.Category", "Category")
                         .WithOne("Links")
-                        .HasForeignKey("BookApi.EntityFrameworkCore.Model.Links", "CategoryId");
+                        .HasForeignKey("BookApi.EntityFrameworkCore.Model.Links", "CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("BookApi.EntityFrameworkCore.Model.LinkObject", "DynamicContent")
                         .WithMany()
