@@ -14,6 +14,20 @@ public class CategoryRepository(CategoryContext context) : ICategoryRepository
         return category;
     }
 
+    public async Task<bool> ModifyAsync(Category category)
+    {
+
+        var categoryToBeUpdated = context.Categories.FirstOrDefault(c => c.Id == category.Id);
+        if(categoryToBeUpdated != null)
+        {
+            context.Categories.Update(category);
+            await context.SaveChangesAsync();
+            return true;
+        } 
+
+        return false;
+    }
+
     public async Task<bool> DeleteAsync(int categoryId)
     {
         var category = context.Categories.FirstOrDefault(c => c.Id == categoryId);

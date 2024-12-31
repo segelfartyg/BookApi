@@ -718,7 +718,8 @@ new Links{Id = 132, SelfId = 394, BooksId = 395, DynamicContentId = 396, Categor
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlite($"Data Source=category.db");
+        string connectionString = $"Server=localhost; User ID=root; Password=''; Database=CategoryDB";
+        optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
         
 //         .UseSeeding((context, _) =>
 //         {

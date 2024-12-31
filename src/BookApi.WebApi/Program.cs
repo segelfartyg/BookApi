@@ -6,8 +6,10 @@ using BookApi.EntityFrameworkCore.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+        string connectionString = $"Server=localhost; User ID=root; Password=''; Database=CategoryDB";
 builder.Services.AddDbContext<CategoryContext>(options =>
-    options.UseSqlite($"Data Source=category.db"));
+    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();

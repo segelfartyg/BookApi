@@ -1,11 +1,6 @@
-using System.IO.Compression;
-using AutoMapper;
 using BookApi.Application.Contracts.Dto;
 using BookApi.Application.Interfaces;
-using BookApi.EntityFrameworkCore.Data;
-using BookApi.EntityFrameworkCore.Model;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace BookApi.Controllers;
 
@@ -23,6 +18,18 @@ public class CategoryController(ICategoryService categoryService) : ControllerBa
         // TODO: Check cache
         var result = categoryService.GetAllCategoriesAsync();
         return Ok(result);
+    }
+
+    /// <summary>
+    /// Modifies a category, parentId is optional, making it possible to also modify child elements by specifying its parent.
+    /// </summary>
+    /// <param name="category"></param>
+    /// <returns></returns>
+    [HttpPatch("")]
+    public async Task<ActionResult<List<CategoryDto>>> PatchCategory([FromBody] PatchCategoryRequestDto category)
+    {   
+        var result = await categoryService.ModifyCategoryAsync(category);
+        return result ? Ok("category modified") : NotFound("no category present");
     }
 
     /// <summary>
