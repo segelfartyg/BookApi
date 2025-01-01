@@ -16,7 +16,7 @@ public class CategoryService(ICategoryRepository categoryRepository, IMapper map
 
         var result = new GetAllCategoriesResponseDto { };
 
-        ConnectionMultiplexer redis = ConnectionMultiplexer.Connect("127.0.0.1:6379");
+        ConnectionMultiplexer redis = ConnectionMultiplexer.Connect("BookApiRedis:6379");
         IDatabase db = redis.GetDatabase();
 
        var cacheRes = db.StringGet("ALL_CATEGORIES_CACHE_KEY");
@@ -27,7 +27,7 @@ public class CategoryService(ICategoryRepository categoryRepository, IMapper map
             return result!;
         }
 
-        var categoryList = await categoryRepository.GetListAsync();
+        var categoryList = categoryRepository.GetList();
 
         List<CategoryDto> mapResult = mapper.Map<List<Category>, List<CategoryDto>>(categoryList);
 

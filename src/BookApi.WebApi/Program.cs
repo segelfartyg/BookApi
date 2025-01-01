@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-        string connectionString = $"Server=localhost; User ID=root; Password=''; Database=CategoryDB";
+string connectionString = $"Server=BookApiDB; User ID=root; Password=''; Database=CategoryDB";
 builder.Services.AddDbContext<CategoryContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 // Add services to the container.

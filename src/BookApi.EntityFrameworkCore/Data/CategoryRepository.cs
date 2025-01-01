@@ -41,13 +41,13 @@ public class CategoryRepository(CategoryContext context) : ICategoryRepository
     }
 
     // TODO: add filtering / limit request size. When handling larger amounts of data this is not good
-    public async Task<List<Category>> GetListAsync()
+    public List<Category> GetList()
     {
 
-        var categories = await context.Categories
+        var categories = context.Categories
         .Include(x => x.Links).ThenInclude(y => y.Self)
         .Include(x => x.Links).ThenInclude(y => y.Books)
-        .Include(x => x.Links).ThenInclude(y => y.DynamicContent).ToListAsync();
+        .Include(x => x.Links).ThenInclude(y => y.DynamicContent).ToList();
 
         return categories;
     }
