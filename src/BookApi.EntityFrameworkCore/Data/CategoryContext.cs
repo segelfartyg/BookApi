@@ -1,8 +1,9 @@
 using BookApi.EntityFrameworkCore.Model;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace BookApi.EntityFrameworkCore.Data;
-public class CategoryContext(DbContextOptions<CategoryContext> options) : DbContext(options)
+public class CategoryContext(DbContextOptions<CategoryContext> options, IConfiguration configuration) : DbContext(options)
 {
     public required DbSet<Category> Categories { get; set; }
     public required DbSet<Links> Links { get; set; }
@@ -718,150 +719,6 @@ new Links{Id = 132, SelfId = 394, BooksId = 395, DynamicContentId = 396, Categor
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        string connectionString = $"Server=BookApiDB; User ID=root; Password=''; Database=CategoryDB";
-        optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
-        
-//         .UseSeeding((context, _) =>
-//         {
-
-//             context.Set<Category>().Add(new Category { Id = 12, Image = new Uri("https://google.se"), Title = "CATEGORY"});
-
-// context.Set<Category>().Add(new Category { ParentId = 12, Id = 13, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 12, Id = 14, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 12, Id = 15, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 12, Id = 16, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 12, Id = 17, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { Id = 2, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 2, Id = 5, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 2, Id = 6, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 2, Id = 8, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 2, Id = 11, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 2, Id = 177, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { Id = 54, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 54, Id = 160, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 54, Id = 161, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 54, Id = 55, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 54, Id = 56, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 54, Id = 57, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 54, Id = 58, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 54, Id = 59, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 54, Id = 60, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 54, Id = 61, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 54, Id = 62, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 54, Id = 63, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 54, Id = 64, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 54, Id = 65, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 54, Id = 66, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 54, Id = 67, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 54, Id = 68, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { Id = 27, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 27, Id = 30, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 27, Id = 32, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 27, Id = 33, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { Id = 48, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 48, Id = 49, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 48, Id = 50, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 48, Id = 51, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 48, Id = 52, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 48, Id = 53, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { Id = 20, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 20, Id = 162, Image = new Uri("https://google.se"), Title = "CATEGORY" });;
-// context.Set<Category>().Add(new Category { ParentId = 20, Id = 22, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 20, Id = 23, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 84, Id = 85, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 84, Id = 86, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 84, Id = 87, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 84, Id = 88, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 84, Id = 89, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 84, Id = 90, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 84, Id = 91, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 84, Id = 92, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 84, Id = 93, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 84, Id = 94, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 84, Id = 95, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 84, Id = 96, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 84, Id = 97, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { Id = 38, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 38, Id = 41, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 38, Id = 43, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 38, Id = 45, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 38, Id = 47, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { Id = 98, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 98, Id = 99, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 98, Id = 100, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 98, Id = 101, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 98, Id = 102, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 98, Id = 103, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 98, Id = 105, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { Id = 34, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 34, Id = 36, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 34, Id = 37, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { Id = 73, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { Id = 24, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { Id = 155, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 155, Id = 156, Image = new Uri("https://google.se"), Title = "CATEGORY"});
-// context.Set<Category>().Add(new Category { ParentId = 155, Id = 157, Image = new Uri("https://google.se"), Title = "CATEGORY"});
-// context.Set<Category>().Add(new Category { ParentId = 155, Id = 158, Image = new Uri("https://google.se"), Title = "CATEGORY"});
-// context.Set<Category>().Add(new Category { ParentId = 155, Id = 159, Image = new Uri("https://google.se"), Title = "CATEGORY"});
-// context.Set<Category>().Add(new Category { Id = 112, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 112, Id = 113, Image = new Uri("https://google.se"), Title = "CATEGORY"});
-// context.Set<Category>().Add(new Category { ParentId = 155, Id = 114, Image = new Uri("https://google.se"), Title = "CATEGORY"});
-// context.Set<Category>().Add(new Category { ParentId = 155, Id = 115, Image = new Uri("https://google.se"), Title = "CATEGORY"});
-// context.Set<Category>().Add(new Category { ParentId = 155, Id = 116, Image = new Uri("https://google.se"), Title = "CATEGORY"});
-// context.Set<Category>().Add(new Category { ParentId = 155, Id = 117, Image = new Uri("https://google.se"), Title = "CATEGORY"});
-// context.Set<Category>().Add(new Category { Id = 118, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 118, Id = 119, Image = new Uri("https://google.se"), Title = "CATEGORY"});
-// context.Set<Category>().Add(new Category { ParentId = 118, Id = 120, Image = new Uri("https://google.se"), Title = "CATEGORY"});
-// context.Set<Category>().Add(new Category { ParentId = 118, Id = 121, Image = new Uri("https://google.se"), Title = "CATEGORY"});
-// context.Set<Category>().Add(new Category { ParentId = 118, Id = 122, Image = new Uri("https://google.se"), Title = "CATEGORY"});
-// context.Set<Category>().Add(new Category { ParentId = 118, Id = 123, Image = new Uri("https://google.se"), Title = "CATEGORY"});
-// context.Set<Category>().Add(new Category { Id = 124, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 124, Id = 125, Image = new Uri("https://google.se"), Title = "CATEGORY"});
-// context.Set<Category>().Add(new Category { ParentId = 124, Id = 126, Image = new Uri("https://google.se"), Title = "CATEGORY"});
-// context.Set<Category>().Add(new Category { ParentId = 124, Id = 127, Image = new Uri("https://google.se"), Title = "CATEGORY"});
-// context.Set<Category>().Add(new Category { ParentId = 124, Id = 128, Image = new Uri("https://google.se"), Title = "CATEGORY"});
-// context.Set<Category>().Add(new Category { ParentId = 124, Id = 129, Image = new Uri("https://google.se"), Title = "CATEGORY"});
-// context.Set<Category>().Add(new Category { Id = 130, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 130, Id = 131, Image = new Uri("https://google.se"), Title = "CATEGORY"});
-// context.Set<Category>().Add(new Category { ParentId = 130, Id = 132, Image = new Uri("https://google.se"), Title = "CATEGORY"});
-// context.Set<Category>().Add(new Category { ParentId = 130, Id = 133, Image = new Uri("https://google.se"), Title = "CATEGORY"});
-// context.Set<Category>().Add(new Category { ParentId = 130, Id = 134, Image = new Uri("https://google.se"), Title = "CATEGORY"});
-// context.Set<Category>().Add(new Category { ParentId = 130, Id = 135, Image = new Uri("https://google.se"), Title = "CATEGORY"});
-// context.Set<Category>().Add(new Category { Id = 136, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 136, Id = 137, Image = new Uri("https://google.se"), Title = "CATEGORY"});
-// context.Set<Category>().Add(new Category { ParentId = 136,  Id = 138, Image = new Uri("https://google.se"), Title = "CATEGORY"});
-// context.Set<Category>().Add(new Category { ParentId = 136,  Id = 139, Image = new Uri("https://google.se"), Title = "CATEGORY"});
-// context.Set<Category>().Add(new Category { ParentId = 136,  Id = 140, Image = new Uri("https://google.se"), Title = "CATEGORY"});
-// context.Set<Category>().Add(new Category { ParentId = 136, Id = 141, Image = new Uri("https://google.se"), Title = "CATEGORY"});
-// context.Set<Category>().Add(new Category { Id = 142, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 142, Id = 143, Image = new Uri("https://google.se"), Title = "CATEGORY"});
-// context.Set<Category>().Add(new Category { ParentId = 142, Id = 144, Image = new Uri("https://google.se"), Title = "CATEGORY"});
-// context.Set<Category>().Add(new Category { ParentId = 142, Id = 145, Image = new Uri("https://google.se"), Title = "CATEGORY"});
-// context.Set<Category>().Add(new Category { ParentId = 142, Id = 146, Image = new Uri("https://google.se"), Title = "CATEGORY"});
-// context.Set<Category>().Add(new Category { ParentId = 142, Id = 147, Image = new Uri("https://google.se"), Title = "CATEGORY"});
-// context.Set<Category>().Add(new Category { Id = 148, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 148, Id = 149, Image = new Uri("https://google.se"), Title = "CATEGORY"});
-// context.Set<Category>().Add(new Category { ParentId = 148, Id = 150, Image = new Uri("https://google.se"), Title = "CATEGORY"});
-// context.Set<Category>().Add(new Category { ParentId = 148, Id = 151, Image = new Uri("https://google.se"), Title = "CATEGORY"});
-// context.Set<Category>().Add(new Category { ParentId = 148, Id = 152, Image = new Uri("https://google.se"), Title = "CATEGORY"});
-// context.Set<Category>().Add(new Category { ParentId = 148, Id = 153, Image = new Uri("https://google.se"), Title = "CATEGORY"});
-// context.Set<Category>().Add(new Category { Id = 165, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 165, Id = 167, Image = new Uri("https://google.se"), Title = "CATEGORY"});
-// context.Set<Category>().Add(new Category { ParentId = 165, Id = 168, Image = new Uri("https://google.se"), Title = "CATEGORY"});
-// context.Set<Category>().Add(new Category { ParentId = 165, Id = 170, Image = new Uri("https://google.se"), Title = "CATEGORY"});
-// context.Set<Category>().Add(new Category { ParentId = 165, Id = 171, Image = new Uri("https://google.se"), Title = "CATEGORY"});
-// context.Set<Category>().Add(new Category { Id = 166, Image = new Uri("https://google.se"), Title = "CATEGORY" });
-// context.Set<Category>().Add(new Category { ParentId = 166, Id = 172, Image = new Uri("https://google.se"), Title = "CATEGORY"});
-// context.Set<Category>().Add(new Category { ParentId = 166, Id = 173, Image = new Uri("https://google.se"), Title = "CATEGORY"});
-// context.Set<Category>().Add(new Category { ParentId = 166, Id = 174, Image = new Uri("https://google.se"), Title = "CATEGORY"});
-// context.Set<Category>().Add(new Category { ParentId = 166, Id = 175, Image = new Uri("https://google.se"), Title = "CATEGORY"});
-// context.Set<Category>().Add(new Category { ParentId = 166, Id = 176, Image = new Uri("https://google.se"), Title = "CATEGORY"});
-
-
-//         });
-
-
-
-    
-
+        Console.WriteLine(configuration.GetConnectionString("Default"));
+        optionsBuilder.UseMySql(configuration.GetConnectionString("Default"), ServerVersion.AutoDetect(configuration.GetConnectionString("Default")));
 }}

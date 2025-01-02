@@ -5,18 +5,19 @@ using BookApi.Application.Contracts.Dto;
 using BookApi.Application.Interfaces;
 using BookApi.EntityFrameworkCore.Interfaces;
 using BookApi.EntityFrameworkCore.Model;
+using Microsoft.Extensions.Configuration;
 using StackExchange.Redis;
 
 namespace BookApi.Application;
 
-public class CategoryService(ICategoryRepository categoryRepository, IMapper mapper) : ICategoryService
+public class CategoryService(ICategoryRepository categoryRepository, IMapper mapper, IConfiguration configuration) : ICategoryService
 {
     public async Task<GetAllCategoriesResponseDto> GetAllCategoriesAsync()
     {
 
         var result = new GetAllCategoriesResponseDto { };
 
-        ConnectionMultiplexer redis = ConnectionMultiplexer.Connect("BookApiRedis:6379");
+        ConnectionMultiplexer redis = ConnectionMultiplexer.Connect(configuration.GetConnectionString("Redis"));
         IDatabase db = redis.GetDatabase();
 
        var cacheRes = db.StringGet("ALL_CATEGORIES_CACHE_KEY");

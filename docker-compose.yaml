@@ -19,6 +19,8 @@ services:
      - "8080:8080"
     environment:
       DOTNET_ENVIRONMENT: "Development"
+      ConnectionStrings__Default: Server=BookApiDB; User ID=root; Password=''; Database=CategoryDB
+      ConnectionStrings__Redis: BookApiRedis:6379
     depends_on:
       - BookApiDB
       - BookApiRedis
