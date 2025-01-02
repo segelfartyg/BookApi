@@ -28,7 +28,7 @@ public class CategoryService(ICategoryRepository categoryRepository, IMapper map
             return result!;
         }
 
-        var categoryList = categoryRepository.GetList();
+        var categoryList = await categoryRepository.GetListAsync();
 
         List<CategoryDto> mapResult = mapper.Map<List<Category>, List<CategoryDto>>(categoryList);
 

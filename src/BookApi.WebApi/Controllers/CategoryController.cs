@@ -13,10 +13,10 @@ public class CategoryController(ICategoryService categoryService) : ControllerBa
     /// </summary>
     /// <returns></returns>
     [HttpGet("all")]
-    public ActionResult<List<CategoryDto>> GetAllCategories()
+    public async Task<ActionResult<List<CategoryDto>>> GetAllCategories()
     {
         // TODO: Check cache
-        var result = categoryService.GetAllCategoriesAsync();
+        var result = await categoryService.GetAllCategoriesAsync();
         return Ok(result);
     }
 
