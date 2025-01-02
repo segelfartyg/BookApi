@@ -31,8 +31,16 @@ public class CategoryRepository(CategoryContext context) : ICategoryRepository
     public async Task<bool> DeleteAsync(int categoryId)
     {
         var category = context.Categories.FirstOrDefault(c => c.Id == categoryId);
+  
         if(category != null)
         {
+
+            var children = context.Categories.Where(c => c.ParentId == category.Id);
+
+            foreach (var child in children) {
+                child.ParentId = null;
+            }
+
             context.Categories.Remove(category);
             await context.SaveChangesAsync();
             return true;

@@ -417,7 +417,7 @@ new LinkObject { Id = 396, Method = "GET", Href = new Uri("https://api.bookbeat.
 
         modelBuilder.Entity<Category>(e => {
             e.HasOne(e => e.Links).WithOne(c => c.Category).HasForeignKey<Links>(x => x.CategoryId).OnDelete(DeleteBehavior.Cascade);
-            e.HasMany(c => c.Children).WithOne(c => c.Parent).HasForeignKey(x => x.ParentId).OnDelete(DeleteBehavior.SetNull);
+            e.HasMany(c => c.Children).WithOne(c => c.Parent).HasForeignKey(x => x.ParentId).OnDelete(DeleteBehavior.ClientSetNull);
             e.HasData(
 new Category { Id = 12, Image =  new Uri("https://prod-bb-images.akamaized.net/categories-covers/cat/img_category_12.png?format=png&quality=75&w=450"), Title = "Crime, Thrillers & Mystery"},
 new Category { Id = 2, Image =   new Uri("https://prod-bb-images.akamaized.net/categories-covers/cat/img_category_2.png?format=png&quality=75&w=450"), Title = "Novels" },
@@ -578,9 +578,9 @@ new Category { ParentId = 166, Id = 176, Image = new Uri("https://prod-bb-images
 
         
         modelBuilder.Entity<Links>(e => {
-            e.HasOne(p => p.Self).WithMany().HasForeignKey(x => x.SelfId);
-            e.HasOne(p => p.Books).WithMany().HasForeignKey(x => x.BooksId);
-            e.HasOne(p => p.DynamicContent).WithMany().HasForeignKey(x => x.DynamicContentId);
+            e.HasOne(p => p.Self).WithMany().HasForeignKey(x => x.SelfId).OnDelete(DeleteBehavior.Restrict);
+            e.HasOne(p => p.Books).WithMany().HasForeignKey(x => x.BooksId).OnDelete(DeleteBehavior.Restrict);
+            e.HasOne(p => p.DynamicContent).WithMany().HasForeignKey(x => x.DynamicContentId).OnDelete(DeleteBehavior.Restrict);
             e.HasData(new Links{Id = 1, SelfId = 1, BooksId = 2, DynamicContentId = 3, CategoryId = 12},
 new Links{Id = 2, SelfId = 4, BooksId = 5, DynamicContentId = 6, CategoryId = 13},
 new Links{Id = 3, SelfId = 7, BooksId = 8, DynamicContentId = 9, CategoryId = 14},
@@ -720,5 +720,5 @@ new Links{Id = 132, SelfId = 394, BooksId = 395, DynamicContentId = 396, Categor
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         Console.WriteLine(configuration.GetConnectionString("Default"));
-        optionsBuilder.UseMySql(configuration.GetConnectionString("Default"), ServerVersion.AutoDetect(configuration.GetConnectionString("Default")));
+        optionsBuilder.UseSqlServer(configuration.GetConnectionString("Default"));
 }}

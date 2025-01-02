@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookApi.EntityFrameworkCore.Migrations
 {
     [DbContext(typeof(CategoryContext))]
-    [Migration("20250101162924_Init")]
-    partial class Init
+    [Migration("20250102195230_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -20,9 +20,9 @@ namespace BookApi.EntityFrameworkCore.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "9.0.0")
-                .HasAnnotation("Relational:MaxIdentifierLength", 64);
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("BookApi.EntityFrameworkCore.Model.Category", b =>
                 {
@@ -30,18 +30,18 @@ namespace BookApi.EntityFrameworkCore.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Image")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("ParentId")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -967,16 +967,16 @@ namespace BookApi.EntityFrameworkCore.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Href")
-                        .HasColumnType("longtext");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Method")
-                        .HasColumnType("longtext");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
-                        .HasColumnType("longtext");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -3499,7 +3499,7 @@ namespace BookApi.EntityFrameworkCore.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int?>("BooksId")
                         .HasColumnType("int");
@@ -3518,7 +3518,8 @@ namespace BookApi.EntityFrameworkCore.Migrations
                     b.HasIndex("BooksId");
 
                     b.HasIndex("CategoryId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[CategoryId] IS NOT NULL");
 
                     b.HasIndex("DynamicContentId");
 
@@ -4589,8 +4590,7 @@ namespace BookApi.EntityFrameworkCore.Migrations
                 {
                     b.HasOne("BookApi.EntityFrameworkCore.Model.Category", "Parent")
                         .WithMany("Children")
-                        .HasForeignKey("ParentId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .HasForeignKey("ParentId");
 
                     b.Navigation("Parent");
                 });
@@ -4599,7 +4599,8 @@ namespace BookApi.EntityFrameworkCore.Migrations
                 {
                     b.HasOne("BookApi.EntityFrameworkCore.Model.LinkObject", "Books")
                         .WithMany()
-                        .HasForeignKey("BooksId");
+                        .HasForeignKey("BooksId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("BookApi.EntityFrameworkCore.Model.Category", "Category")
                         .WithOne("Links")
@@ -4608,11 +4609,13 @@ namespace BookApi.EntityFrameworkCore.Migrations
 
                     b.HasOne("BookApi.EntityFrameworkCore.Model.LinkObject", "DynamicContent")
                         .WithMany()
-                        .HasForeignKey("DynamicContentId");
+                        .HasForeignKey("DynamicContentId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("BookApi.EntityFrameworkCore.Model.LinkObject", "Self")
                         .WithMany()
-                        .HasForeignKey("SelfId");
+                        .HasForeignKey("SelfId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Books");
 
