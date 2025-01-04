@@ -14,6 +14,6 @@ An API for listing book categories
 5.  ```docker compose up```
 
 ## Local development setup:
-1. Run database container: ```sudo docker run --name bookapi-mysql -e MYSQL_ROOT_PASSWORD='' -p 3306:3306 -e MYSQL_ALLOW_EMPTY_PASSWORD='yes' -d mysql:latest```
+1. Run database container: ```docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=YourStrong(!)Password" -p 1433:1433 -d mcr.microsoft.com/mssql/server:2022-latest```
 2. Run redis container: ```sudo docker run --name bookbapi-redis -p 6379:6379 -d redis```
 3. Run the application: ```dotnet run --project ./BookApi.WebApi/BookApi.WebApi.csproj```
