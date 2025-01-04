@@ -1,12 +1,12 @@
 services:
   BookApiDB:
-    image: mysql:latest
+    image: mcr.microsoft.com/mssql/server:2022-latest
     restart: always
     ports:
-      - "3306:3306"
+      - "1433:1433"
     environment:
-      MYSQL_ALLOW_EMPTY_PASSWORD: yes
-      MYSQL_ROOT_PASSWORD: ''
+      MSSQL_SA_PASSWORD: YourStrong(!)Password
+      ACCEPT_EULA: Y
   BookApiRedis:
     image: redis
     restart: always
