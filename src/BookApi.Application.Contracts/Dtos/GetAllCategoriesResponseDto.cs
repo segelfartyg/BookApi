@@ -9,5 +9,4 @@ public class GetAllCategoriesResponseDto
     public ApiLinksDto ApiLinks {get;set;} = new ApiLinksDto();
     [JsonPropertyName("_embedded")]
     public EmbeddedDto Embedded {get;set;} = new EmbeddedDto();
-    
 }

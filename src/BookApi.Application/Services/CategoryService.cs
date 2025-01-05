@@ -10,14 +10,24 @@ using StackExchange.Redis;
 
 namespace BookApi.Application;
 
+/// <summary>
+/// Category service, used to provide functionality for the controller to retrieve and manipulate categories
+/// </summary>
+/// <param name="categoryRepository"></param>
+/// <param name="mapper"></param>
+/// <param name="configuration"></param>
 public class CategoryService(ICategoryRepository categoryRepository, IMapper mapper, IConfiguration configuration) : ICategoryService
-{
+{   
+    /// <summary>
+    /// Retrieves all Categories from db, caching the result
+    /// </summary>
+    /// <returns></returns>
     public async Task<GetAllCategoriesResponseDto> GetAllCategoriesAsync()
     {
 
         var result = new GetAllCategoriesResponseDto { };
 
-        ConnectionMultiplexer redis = ConnectionMultiplexer.Connect(configuration.GetConnectionString("Redis"));
+        ConnectionMultiplexer redis = ConnectionMultiplexer.Connect(configuration.GetConnectionString("Redis")!);
         IDatabase db = redis.GetDatabase();
 
        var cacheRes = db.StringGet("ALL_CATEGORIES_CACHE_KEY");
@@ -42,11 +52,16 @@ public class CategoryService(ICategoryRepository categoryRepository, IMapper map
         };
 
         var json = JsonSerializer.Serialize(result, options);
-        var cacheSetRes = db.StringSet("ALL_CATEGORIES_CACHE_KEY", json);
+        var cacheSetRes = await db.StringSetAsync("ALL_CATEGORIES_CACHE_KEY", json);
 
         return result;
     }
 
+    /// <summary>
+    /// Adds a category to the repository 
+    /// </summary>
+    /// <param name="category"></param>
+    /// <returns></returns>
     public async Task<CategoryDto> AddCategoryAsync(PostCategoryRequestDto category)
     {
         var cat = new Category()
@@ -61,19 +76,16 @@ public class CategoryService(ICategoryRepository categoryRepository, IMapper map
             CategoryId = cat.Id
         };
 
-        // TODO: ADD NULL CHECKS
         links.Self = new LinkObject();
         links.Self.Href = category.Links.Self.Href;
         links.Self.Method = category.Links.Self.Method;
         links.Self.Title = category.Links.Self.Title;
 
-        // TODO: ADD NULL CHECKS
         links.Books = new LinkObject();
         links.Books.Href = category.Links.Books.Href;
         links.Books.Method = category.Links.Books.Method;
         links.Books.Title = category.Links.Books.Title;
 
-        // TODO: ADD NULL CHECKS
         links.DynamicContent = new LinkObject();
         links.DynamicContent.Href = category.Links.DynamicContent.Href;
         links.DynamicContent.Method = category.Links.DynamicContent.Method;
@@ -88,7 +100,11 @@ public class CategoryService(ICategoryRepository categoryRepository, IMapper map
         return result;
     }
 
-
+    /// <summary>
+    /// Takes in a category and modifies it
+    /// </summary>
+    /// <param name="category"></param>
+    /// <returns></returns>
     public async Task<bool> ModifyCategoryAsync(PatchCategoryRequestDto category)
     {
         var cat = new Category()
@@ -104,19 +120,16 @@ public class CategoryService(ICategoryRepository categoryRepository, IMapper map
             CategoryId = cat.Id
         };
 
-        // TODO: ADD NULL CHECKS
         links.Self = new LinkObject();
         links.Self.Href = category.Links.Self.Href;
         links.Self.Method = category.Links.Self.Method;
         links.Self.Title = category.Links.Self.Title;
 
-        // TODO: ADD NULL CHECKS
         links.Books = new LinkObject();
         links.Books.Href = category.Links.Books.Href;
         links.Books.Method = category.Links.Books.Method;
         links.Books.Title = category.Links.Books.Title;
 
-        // TODO: ADD NULL CHECKS
         links.DynamicContent = new LinkObject();
         links.DynamicContent.Href = category.Links.DynamicContent.Href;
         links.DynamicContent.Method = category.Links.DynamicContent.Method;
@@ -128,6 +141,11 @@ public class CategoryService(ICategoryRepository categoryRepository, IMapper map
         return await categoryRepository.ModifyAsync(cat);
     }
 
+    /// <summary>
+    /// Deletes a category based on categoryId
+    /// </summary>
+    /// <param name="categoryId"></param>
+    /// <returns></returns>
     public Task<bool> DeleteCategoryAsync(int categoryId)
     {
         return categoryRepository.DeleteAsync(categoryId);

@@ -1,5 +1,3 @@
-using System.Text.Json.Serialization;
-
 namespace BookApi.EntityFrameworkCore.Model;
 
 public class LinkObject
@@ -8,5 +6,4 @@ public class LinkObject
     public  Uri? Href {get;set;}
     public string? Method {get;set;}
     public string? Title {get;set;}
-
 }

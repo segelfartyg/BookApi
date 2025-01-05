@@ -4,8 +4,18 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BookApi.EntityFrameworkCore.Data;
 
+/// <summary>
+/// Repository for accessing and manipulating Categories in the data layer
+/// </summary>
+/// <param name="context"></param>
 public class CategoryRepository(CategoryContext context) : ICategoryRepository
 {
+
+    /// <summary>
+    /// Adds a category to db
+    /// </summary>
+    /// <param name="category"></param>
+    /// <returns>Category</returns>
     public async Task<Category> AddAsync(Category category)
     {
         await context.Categories.AddAsync(category);
@@ -14,10 +24,15 @@ public class CategoryRepository(CategoryContext context) : ICategoryRepository
         return category;
     }
 
+    /// <summary>
+    /// Changes an existing Category in the db,
+    /// </summary>
+    /// <param name="category">The category itself containing the wished state of the category</param>
+    /// <returns>boolean of the result</returns>
     public async Task<bool> ModifyAsync(Category category)
     {
 
-        var categoryToBeUpdated = context.Categories.FirstOrDefault(c => c.Id == category.Id);
+        var categoryToBeUpdated = await context.Categories.FirstOrDefaultAsync(c => c.Id == category.Id);
         if(categoryToBeUpdated != null)
         {
             context.Categories.Update(category);
@@ -28,9 +43,14 @@ public class CategoryRepository(CategoryContext context) : ICategoryRepository
         return false;
     }
 
+    /// <summary>
+    /// Deletes an existing Category in the db with 
+    /// </summary>
+    /// <param name="categoryId">the id of the category</param>
+    /// <returns>boolean of the result</returns>
     public async Task<bool> DeleteAsync(int categoryId)
     {
-        var category = context.Categories.FirstOrDefault(c => c.Id == categoryId);
+        var category = await context.Categories.FirstOrDefaultAsync(c => c.Id == categoryId);
   
         if(category != null)
         {
@@ -48,10 +68,14 @@ public class CategoryRepository(CategoryContext context) : ICategoryRepository
         return false;
     }
 
-    // TODO: add filtering / limit request size. When handling larger amounts of data this is not good
+    /// <summary>
+    /// Get all Categories in the database
+    /// </summary>
+    /// <returns>a list of all the categories</returns>
     public async Task<List<Category>> GetListAsync()
-    {
+    {   
 
+        // TODO: add filtering / limit request size. When handling larger amounts of data this is not good
         var categories = await context.Categories
         .Include(x => x.Links).ThenInclude(y => y.Self)
         .Include(x => x.Links).ThenInclude(y => y.Books)
@@ -59,4 +83,5 @@ public class CategoryRepository(CategoryContext context) : ICategoryRepository
 
         return categories;
     }
+    
 }

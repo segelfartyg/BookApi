@@ -1,12 +1,7 @@
-using System;
-using System.Text.Json.Serialization;
-using Microsoft.Extensions.FileProviders;
-
 namespace BookApi.EntityFrameworkCore.Model;
 
 public class Category
 {
-
     public int Id {get;set;}
     public required Uri Image {get;set;}
     public required string Title {get;set;}

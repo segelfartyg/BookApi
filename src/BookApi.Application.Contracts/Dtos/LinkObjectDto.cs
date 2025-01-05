@@ -9,5 +9,4 @@ public class LinkObjectDto
     public  Uri? Href {get;set;}
     public string? Method {get;set;}
     public string? Title {get;set;} 
- 
 }

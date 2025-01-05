@@ -6,9 +6,6 @@ public class CategoryDto
     public required Uri Image {get;set;}
     public required string Title {get;set;}
     public  LinksDto? Links {get;set;}
-
     public int ParentId {get;set;}
-
     public List<CategoryDto> Children {get;set;} = new List<CategoryDto>();
-
 }

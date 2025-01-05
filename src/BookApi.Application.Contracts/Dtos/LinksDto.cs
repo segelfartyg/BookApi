@@ -7,9 +7,7 @@ public class LinksDto
 {
     [JsonIgnore]
     public int Id {get;set;}
-    public LinkObjectDto Self {get;set;}
-    public LinkObjectDto Books {get;set;}
-    public LinkObjectDto DynamicContent {get;set;}
-
-
+    public LinkObjectDto? Self {get;set;}
+    public LinkObjectDto? Books {get;set;}
+    public LinkObjectDto? DynamicContent {get;set;}
 }

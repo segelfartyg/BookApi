@@ -7,7 +7,7 @@ namespace BookApi.Controllers;
 [Route("/api/v1/[controller]")]
 public class CategoryController(ICategoryService categoryService) : ControllerBase
 {
-
+    
     /// <summary>
     /// Retrieves all categories, including child categories, present in the system.
     /// </summary>
@@ -50,11 +50,12 @@ public class CategoryController(ICategoryService categoryService) : ControllerBa
     /// <param name="categoryId"></param>
     /// <returns></returns>
     [HttpDelete("{categoryId}")]
-     public async Task<ActionResult<List<CategoryDto>>> DeleteCategory([FromRoute] int categoryId)
+    public async Task<ActionResult<List<CategoryDto>>> DeleteCategory([FromRoute] int categoryId)
     {
 
         var result = await categoryService.DeleteCategoryAsync(categoryId);
         return result ? Ok("category deleted") : NotFound("no category present");
 
     }
+
 }

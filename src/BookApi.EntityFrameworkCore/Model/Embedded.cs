@@ -6,5 +6,4 @@ public class Embedded
     public List<Category>? Children {get;set;}
     public required Category Category {get;set;}
     public required int CategoryId {get;set;}
-      
 }
