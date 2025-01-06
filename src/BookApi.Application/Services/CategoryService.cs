@@ -53,7 +53,7 @@ public class CategoryService(ICategoryRepository categoryRepository, IMapper map
 
         TimeSpan timeSpan = TimeSpan.FromSeconds(20);
         var json = JsonSerializer.Serialize(result, options);
-        
+
         var cacheSetRes = await db.StringSetAsync("ALL_CATEGORIES_CACHE_KEY", json, timeSpan);
 
         return result;
@@ -67,7 +67,6 @@ public class CategoryService(ICategoryRepository categoryRepository, IMapper map
     public async Task<CategoryDto> AddCategoryAsync(PostCategoryRequestDto category)
     {
         // TODO: ADD MORE VALIDATION, DEPENDING ON BUSINESS RULES OF LINKOBJECTS
-
         var cat = new Category()
         {
             Title = category.Title,
@@ -122,7 +121,6 @@ public class CategoryService(ICategoryRepository categoryRepository, IMapper map
     /// <returns></returns>
     public async Task<bool> ModifyCategoryAsync(PatchCategoryRequestDto category)
     {
-
         // TODO: ADD MORE VALIDATION, DEPENDING ON BUSINESS RULES OF LINKOBJECTS
         var cat = new Category()
         {

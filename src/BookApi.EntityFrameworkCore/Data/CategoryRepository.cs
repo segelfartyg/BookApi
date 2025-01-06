@@ -35,7 +35,7 @@ public class CategoryRepository(CategoryContext context) : ICategoryRepository
         var categoryToBeUpdated = await context.Categories.FirstOrDefaultAsync(c => c.Id == category.Id);
         if(categoryToBeUpdated != null)
         {
-            context.Categories.Update(category);
+            context.Entry(categoryToBeUpdated).CurrentValues.SetValues(category);
             await context.SaveChangesAsync();
             return true;
         } 
