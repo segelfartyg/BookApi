@@ -16,8 +16,13 @@ namespace BookApi.Application;
 /// <param name="categoryRepository"></param>
 /// <param name="mapper"></param>
 /// <param name="configuration"></param>
+/// 
 public class CategoryService(ICategoryRepository categoryRepository, IMapper mapper, IConfiguration configuration) : ICategoryService
 {   
+
+    // TODO: when more settings like this is needed, make use of options pattern instead. 
+    public const int CACHE_TTL_IN_SECONDS = 20;
+
     /// <summary>
     /// Retrieves all Categories from db, caching the result
     /// </summary>
@@ -45,13 +50,15 @@ public class CategoryService(ICategoryRepository categoryRepository, IMapper map
         var embedded = mapResult.Where(c => c.ParentId == 0);
         result.Embedded.Categories = embedded.ToList();
 
+
+        // TODO: when needed elsewhere, make cache service instead of doing this
         var options = new JsonSerializerOptions
         {
             WriteIndented = true,
             DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
         };
 
-        TimeSpan timeSpan = TimeSpan.FromSeconds(20);
+        TimeSpan timeSpan = TimeSpan.FromSeconds(CACHE_TTL_IN_SECONDS);
         var json = JsonSerializer.Serialize(result, options);
 
         var cacheSetRes = await db.StringSetAsync("ALL_CATEGORIES_CACHE_KEY", json, timeSpan);

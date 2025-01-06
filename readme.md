@@ -17,3 +17,4 @@ An API for listing book categories
 1. Run database container: ```docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=YourStrong(!)Password" -p 1433:1433 -d mcr.microsoft.com/mssql/server:2022-latest```
 2. Run redis container: ```sudo docker run --name bookbapi-redis -p 6379:6379 -d redis```
 3. Run the application: ```dotnet run --project ./BookApi.WebApi/BookApi.WebApi.csproj```
+
