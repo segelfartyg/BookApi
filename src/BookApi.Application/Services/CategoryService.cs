@@ -64,6 +64,8 @@ public class CategoryService(ICategoryRepository categoryRepository, IMapper map
     /// <returns></returns>
     public async Task<CategoryDto> AddCategoryAsync(PostCategoryRequestDto category)
     {
+        // TODO: ADD MORE VALIDATION, DEPENDING ON BUSINESS RULES OF LINKOBJECTS
+
         var cat = new Category()
         {
             Title = category.Title,
@@ -77,19 +79,30 @@ public class CategoryService(ICategoryRepository categoryRepository, IMapper map
         };
 
         links.Self = new LinkObject();
-        links.Self.Href = category.Links.Self.Href;
-        links.Self.Method = category.Links.Self.Method;
-        links.Self.Title = category.Links.Self.Title;
 
+        if(category.Links.Self != null) 
+        {
+            links.Self.Href = category.Links.Self.Href;
+            links.Self.Method = category.Links.Self.Method;
+            links.Self.Title = category.Links.Self.Title;
+        }
+        
         links.Books = new LinkObject();
-        links.Books.Href = category.Links.Books.Href;
-        links.Books.Method = category.Links.Books.Method;
-        links.Books.Title = category.Links.Books.Title;
+        if(category.Links.Books != null) {
+
+            links.Books.Href = category.Links.Books.Href;
+            links.Books.Method = category.Links.Books.Method;
+            links.Books.Title = category.Links.Books.Title;
+        }
 
         links.DynamicContent = new LinkObject();
-        links.DynamicContent.Href = category.Links.DynamicContent.Href;
-        links.DynamicContent.Method = category.Links.DynamicContent.Method;
-        links.DynamicContent.Title = category.Links.DynamicContent.Title;
+
+        if(category.Links.DynamicContent != null){
+            links.DynamicContent.Href = category.Links.DynamicContent.Href;
+            links.DynamicContent.Method = category.Links.DynamicContent.Method;
+            links.DynamicContent.Title = category.Links.DynamicContent.Title;
+        }
+
 
         cat.Links = links;
         cat.ParentId = category.ParentId;
@@ -107,6 +120,8 @@ public class CategoryService(ICategoryRepository categoryRepository, IMapper map
     /// <returns></returns>
     public async Task<bool> ModifyCategoryAsync(PatchCategoryRequestDto category)
     {
+
+        // TODO: ADD MORE VALIDATION, DEPENDING ON BUSINESS RULES OF LINKOBJECTS
         var cat = new Category()
         {
             Id = category.Id,
@@ -121,19 +136,29 @@ public class CategoryService(ICategoryRepository categoryRepository, IMapper map
         };
 
         links.Self = new LinkObject();
-        links.Self.Href = category.Links.Self.Href;
-        links.Self.Method = category.Links.Self.Method;
-        links.Self.Title = category.Links.Self.Title;
 
+        if(category.Links.Self != null) 
+        {
+            links.Self.Href = category.Links.Self.Href;
+            links.Self.Method = category.Links.Self.Method;
+            links.Self.Title = category.Links.Self.Title;
+        }
+        
         links.Books = new LinkObject();
-        links.Books.Href = category.Links.Books.Href;
-        links.Books.Method = category.Links.Books.Method;
-        links.Books.Title = category.Links.Books.Title;
+        if(category.Links.Books != null) {
+
+            links.Books.Href = category.Links.Books.Href;
+            links.Books.Method = category.Links.Books.Method;
+            links.Books.Title = category.Links.Books.Title;
+        }
 
         links.DynamicContent = new LinkObject();
-        links.DynamicContent.Href = category.Links.DynamicContent.Href;
-        links.DynamicContent.Method = category.Links.DynamicContent.Method;
-        links.DynamicContent.Title = category.Links.DynamicContent.Title;
+
+        if(category.Links.DynamicContent != null){
+            links.DynamicContent.Href = category.Links.DynamicContent.Href;
+            links.DynamicContent.Method = category.Links.DynamicContent.Method;
+            links.DynamicContent.Title = category.Links.DynamicContent.Title;
+        }
 
         cat.Links = links;
         cat.ParentId = category.ParentId;
