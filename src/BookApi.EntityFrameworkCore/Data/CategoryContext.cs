@@ -8,6 +8,10 @@ public class CategoryContext(DbContextOptions<CategoryContext> options, IConfigu
         public required DbSet<Category> Categories { get; set; }
         public required DbSet<Links> Links { get; set; }
         public required DbSet<LinkObject> LinkObject { get; set; }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+                optionsBuilder.UseSqlServer(configuration.GetConnectionString("Default"));
+        }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
@@ -711,12 +715,5 @@ public class CategoryContext(DbContextOptions<CategoryContext> options, IConfigu
             new Links { Id = 131, SelfId = 391, BooksId = 392, DynamicContentId = 393, CategoryId = 175 },
             new Links { Id = 132, SelfId = 394, BooksId = 395, DynamicContentId = 396, CategoryId = 176 });
                 });
-
-        }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-                Console.WriteLine(configuration.GetConnectionString("Default"));
-                optionsBuilder.UseSqlServer(configuration.GetConnectionString("Default"));
         }
 }
