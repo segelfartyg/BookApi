@@ -51,8 +51,10 @@ public class CategoryService(ICategoryRepository categoryRepository, IMapper map
             DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
         };
 
+        TimeSpan timeSpan = TimeSpan.FromSeconds(20);
         var json = JsonSerializer.Serialize(result, options);
-        var cacheSetRes = await db.StringSetAsync("ALL_CATEGORIES_CACHE_KEY", json);
+        
+        var cacheSetRes = await db.StringSetAsync("ALL_CATEGORIES_CACHE_KEY", json, timeSpan);
 
         return result;
     }
