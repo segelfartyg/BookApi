@@ -23,7 +23,7 @@ jobs:
       - name: Determine Version
         uses: gittools/actions/gitversion/execute@v3.1.1
 
-      - name Git Bashing Version
+      - name: Git Bashing Version
         run: echo ${{ steps.<id>.outputs.<outputName> }}
       # - name: Log in to Docker Hub
       #   uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
