@@ -41,6 +41,4 @@ jobs:
           context: ./src
           file: ./src/Dockerfile
           push: true
-          tags: 
-            - segelfartyg/bookapi:${{ env.GitVersion_SemVer}}
-            - segelfartyg/bookapi:latest
+          tags: segelfartyg/bookapi:${{ env.GitVersion_SemVer}} , segelfartyg/bookapi:latest
