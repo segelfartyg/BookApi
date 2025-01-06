@@ -8,10 +8,8 @@ An API for listing book categories
 ## Run it:
 1. ```git clone https://github.com/segelfartyg/BookApi.git```
 2. ```cd BookApi```
-3. ```cd src```
-4. ```sudo docker build -t segelfartyg/bookapi -f Dockerfile . ```
-3. ```cd .. ```
-5.  ```docker compose up```
+3. ```docker compose up```
+4. Go to ```http://localhost:8080/swagger/index.html```
 
 ## Local development setup:
 1. Run database container: ```docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=YourStrong(!)Password" -p 1433:1433 -d mcr.microsoft.com/mssql/server:2022-latest```
