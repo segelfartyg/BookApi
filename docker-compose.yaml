@@ -1,0 +1,26 @@
+services:
+  BookApiDB:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    restart: always
+    ports:
+      - "1433:1433"
+    environment:
+      MSSQL_SA_PASSWORD: YourStrong(!)Password
+      ACCEPT_EULA: Y
+  BookApiRedis:
+    image: redis
+    restart: always
+    ports:
+     - "6379:6379"
+  BookApi:
+    image: segelfartyg/bookapi:latest
+    restart: always
+    ports:
+     - "8080:8080"
+    environment:
+      DOTNET_ENVIRONMENT: "Development"
+      ConnectionStrings__Default: Server=BookApiDB;Database=CategoryDB;User=sa;Password='YourStrong(!)Password';TrustServerCertificate=True;
+      ConnectionStrings__Redis: BookApiRedis:6379
+    depends_on:
+      - BookApiDB
+      - BookApiRedis
